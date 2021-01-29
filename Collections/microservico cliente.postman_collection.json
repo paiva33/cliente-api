@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "8a33f5de-49ac-4435-82ff-e2f99ce772d6",
+		"name": "microservico cliente",
+		"description": "Some description about your API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Cliente",
+					"item": [
+						{
+							"name": "Encontrar todos os clientes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar todos os clientes por nome cpf",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1/findPorNomeCpf/?nome=X",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1",
+										"findPorNomeCpf",
+										""
+									],
+									"query": [
+										{
+											"key": "nome",
+											"value": "X"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar clientes",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n                \"id\": 3,\r\n                \"nome\": \"Cliente XXX\",\r\n                \"cpf\": \"555555555555\",\r\n                \"dataNascimento\": \"2010-05-01\"                \r\n            }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar novo cliente",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Cliente XXX\",\r\n    \"cpf\": \"444444444444\",\r\n    \"dataNascimento\": \"2010-05-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar um novo cliente por id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Disable a specific person by your ID",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar cliente",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/cliente/v1/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"cliente",
+										"v1",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Folder for api"
+		}
+	]
+}

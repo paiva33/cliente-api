@@ -1,29 +1,10 @@
-# README #
+HELP.mdHELP.md# README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### Inciando o mysql ###
 
-### What is this repository for? ###
+* docker-compose -f src/main/docker/mysql.yml up -d
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Collections postman ###
 
-### How do I get set up? ###
+* diretorio do projeto Collections
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
