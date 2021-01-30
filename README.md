@@ -8,5 +8,6 @@ HELP.mdHELP.md# README #
 
 * diretorio do projeto Collections
 
+## Swagger
 
-##
+* http://localhost:8080/swagger-ui.html
