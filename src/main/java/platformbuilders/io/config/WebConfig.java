@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import platformbuilders.io.serialization.converter.YamlJackson2HttpMessageConverter;
@@ -18,6 +19,13 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(new YamlJackson2HttpMessageConverter());
+	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("swagger-ui.html")
+//		.addResourceLocations("classpath")
+		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 	
 	public void addCorsMappings(CorsRegistry registry) {

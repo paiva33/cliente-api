@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import platformbuilders.io.config.Messages;
 import platformbuilders.io.converter.DozerConverter;
 import platformbuilders.io.data.model.Cliente;
 import platformbuilders.io.data.vo.v1.ClienteVO;
@@ -24,6 +25,8 @@ import platformbuilders.io.repository.specs.ClienteSpecs;
 @Service
 @RequiredArgsConstructor
 public class ClienteServices {
+	
+	private final Messages messages;
 
 	private final ClienteRepository repository;
 
@@ -49,13 +52,13 @@ public class ClienteServices {
 
 	public ClienteVO findById(Long id) {
 		var entity = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para este ID"));
+				.orElseThrow(() -> new ResourceNotFoundException(messages.get("nenhum.registro.encontrado")));
 		return DozerConverter.parseObject(entity, ClienteVO.class);
 	}
 	
 	public ClienteVO update(ClienteVO cliente) {
 		var entity = repository.findById(cliente.getKey())
-				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para este ID"));
+				.orElseThrow(() -> new ResourceNotFoundException(messages.get("nenhum.registro.encontrado")));
 		entity.setCpf(cliente.getCpf());
 		entity.setDataNascimento(cliente.getDataNascimento());
 		entity.setNome(cliente.getNome());
@@ -65,7 +68,7 @@ public class ClienteServices {
 	
 	public void delete(Long id) {
 		Cliente entity = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para este ID"));
+				.orElseThrow(() -> new ResourceNotFoundException(messages.get("nenhum.registro.encontrado")));
 		repository.delete(entity);
 	}
 	
@@ -73,7 +76,7 @@ public class ClienteServices {
 	public ClienteVO desativarCliente(Long id) {
 		repository.desativarCliente(id);			
 		var entity = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para este ID"));
+				.orElseThrow(() -> new ResourceNotFoundException(messages.get("nenhum.registro.encontrado")));
 		return DozerConverter.parseObject(entity, ClienteVO.class);
 	}
 

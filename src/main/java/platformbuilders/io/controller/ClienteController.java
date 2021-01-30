@@ -63,7 +63,7 @@ public class ClienteController {
 		
 		PagedResources<?> resources = assembler.toResource(clientes);
 		
-		return new ResponseEntity(resources, HttpStatus.OK);
+		return new ResponseEntity<>(resources, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Encontrar um cliente por cpf e nome" ) 
@@ -120,7 +120,7 @@ public class ClienteController {
 		return clienteVO;
 	}
 
-	@ApiOperation(value = "Disable a specific person by your ID")
+	@ApiOperation(value = "Desativar um cliente especifico por id")
 	@PatchMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ClienteVO disablePerson(@PathVariable("id") Long id) {
 		ClienteVO clienteVO = service.desativarCliente(id);
