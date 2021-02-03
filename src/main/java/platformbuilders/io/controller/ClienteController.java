@@ -1,16 +1,14 @@
 package platformbuilders.io.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.HttpStatus;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,26 +21,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import platformbuilders.io.data.vo.v1.ClienteVO;
 import platformbuilders.io.filter.ClienteFilter;
 import platformbuilders.io.services.ClienteServices;
 
 @RequiredArgsConstructor
-@Api(tags = "ClienteEndpoint")
+@Tag(name = "ClienteEndpoint")
 @RestController
 @RequestMapping("/api/cliente/v1")
 public class ClienteController {
 
 	private final ClienteServices service;
 	
-	private final PagedResourcesAssembler<ClienteVO> assembler;
 
-	@ApiOperation(value = "Encontrar todos os clientes")
+	@Operation(summary = "Encontrar todos os clientes")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
-	public ResponseEntity<?> findAll(
+	public ResponseEntity<CollectionModel<ClienteVO>> findAll(
 			@RequestParam(value="page", defaultValue = "0") int page,
 			@RequestParam(value="limit", defaultValue = "12") int limit,
 			@RequestParam(value="direction", defaultValue = "asc") String direction) {
@@ -61,14 +58,12 @@ public class ClienteController {
 			);
 		// @formatter:on
 		
-		PagedResources<?> resources = assembler.toResource(clientes);
-		
-		return new ResponseEntity<>(resources, HttpStatus.OK);
+		return ResponseEntity.ok(CollectionModel.of(clientes));
 	}
 	
-	@ApiOperation(value = "Encontrar um cliente por cpf e nome" ) 
+	@Operation(summary = "Encontrar um cliente por cpf e nome" ) 
 	@GetMapping(value = "/findPorNomeCpf", produces = { "application/json", "application/xml", "application/x-yaml" })
-	public ResponseEntity<?> findClientePorCpfNome(
+	public ResponseEntity<CollectionModel<ClienteVO>> findClientePorCpfNome(
 			@RequestParam(required = false) String nome,
 			@RequestParam(required = false) String cpf,
 			@RequestParam(value="page", defaultValue = "0") int page,
@@ -89,12 +84,10 @@ public class ClienteController {
 				)
 			);
 		
-		PagedResources<?> resources = assembler.toResource(clientes);
-		
-		return new ResponseEntity<>(resources, HttpStatus.OK);
+		return ResponseEntity.ok(CollectionModel.of(clientes));
 	}	
 
-	@ApiOperation(value = "Encontrar cliente por ID")
+	@Operation(summary = "Encontrar cliente por ID")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ClienteVO findById(@PathVariable("id") Long id) {
 		ClienteVO clienteVO = service.findById(id);
@@ -102,7 +95,7 @@ public class ClienteController {
 		return clienteVO;
 	}
 
-	@ApiOperation(value = "Criar um cliente")
+	@Operation(summary = "Criar um cliente")
 	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
 			"application/json", "application/xml", "application/x-yaml" })
 	public ClienteVO create(@RequestBody ClienteVO cliente) {
@@ -111,7 +104,7 @@ public class ClienteController {
 		return clienteVO;
 	}
 
-	@ApiOperation(value = "Atualizar um cliente")
+	@Operation(summary = "Atualizar um cliente")
 	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
 			"application/json", "application/xml", "application/x-yaml" })
 	public ClienteVO update(@RequestBody ClienteVO person) {
@@ -120,7 +113,7 @@ public class ClienteController {
 		return clienteVO;
 	}
 
-	@ApiOperation(value = "Desativar um cliente especifico por id")
+	@Operation(summary = "Desativar um cliente especifico por id")
 	@PatchMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ClienteVO disablePerson(@PathVariable("id") Long id) {
 		ClienteVO clienteVO = service.desativarCliente(id);
@@ -128,7 +121,7 @@ public class ClienteController {
 		return clienteVO;
 	}
 
-	@ApiOperation(value = "Deletar um cliente")
+	@Operation(summary = "Deletar um cliente")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		service.delete(id);

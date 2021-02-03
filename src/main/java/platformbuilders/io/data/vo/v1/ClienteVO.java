@@ -3,7 +3,7 @@ package platformbuilders.io.data.vo.v1;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,7 +16,7 @@ import platformbuilders.io.util.Idade;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @JsonPropertyOrder({ "id", "nome", "cpf", "dataNascimento", "ativo" })
-public class ClienteVO extends ResourceSupport implements Serializable {
+public class ClienteVO extends RepresentationModel<ClienteVO> implements Serializable {
 
 	/**
 	 * 
