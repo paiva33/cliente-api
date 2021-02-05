@@ -17,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	private static final MediaType MEDIA_TYPE_YML = MediaType.valueOf("application/x-yaml");
 	
+	@Override 
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(new YamlJackson2HttpMessageConverter());
 	}
@@ -28,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer{
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 	
+	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
 			.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
@@ -35,7 +37,7 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer ) {
-		configurer.favorPathExtension(false)
+		configurer
 		.favorParameter(false)
 		.ignoreAcceptHeader(false)
 		.useRegisteredExtensionsOnly(false)
