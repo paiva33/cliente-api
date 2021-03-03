@@ -1,4 +1,3 @@
-HELP.mdHELP.md# README #
 
 ### Inciando o mysql ###
 
@@ -6,7 +5,7 @@ HELP.mdHELP.md# README #
 
 ### Collections postman ###
 
-* diretorio do projeto Collections
+* diretorio do projeto Collections do Postman
 
 ## Swagger
 
