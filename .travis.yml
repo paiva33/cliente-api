@@ -1,0 +1,4 @@
+language: bash
+services: docker
+before_install:
+  - echo "We are in the Docker folder!!!"
